@@ -17,6 +17,7 @@ const isLiked = (id) => {
 };
 
 const addToLiked = (id) => {
+  // likedPostsId = "";
   likedPostsId.push(id); 
     showPosts(posts);
 };
@@ -36,17 +37,26 @@ const switchTab = (id) => {
         document.getElementById( "posts" ).style.display = "grid";
         document.getElementById( "liked" ).style.display = "none";
         document.getElementById( "reported" ).style.display = "none";
+        document.getElementById('question-with-answer').style.display='block'
+        document.getElementById('liked-title').style.display='none'
+        document.getElementById('report-title').style.display='none'
     } else if (id === "liked") {
         document.getElementById( "liked" ).style.display = "block";
         document.getElementById( "posts" ).style.display = "none";
         document.getElementById( "reported" ).style.display = "none";
+        document.getElementById('question-with-answer').style.display='none'
+        document.getElementById('report-title').style.display='none'
+        document.getElementById('liked-title').style.display='block'
         document.getElementById( "liked" ).textContent='';
         displayLikedPosts();
     } else {
         document.getElementById( "reported" ).style.display = "block";
         document.getElementById( "posts" ).style.display = "none";
         document.getElementById( "liked" ).style.display = "none";
-        document.getElementById( "reported" ).textContent='';
+        document.getElementById('question-with-answer').style.display='none'
+        document.getElementById('liked-title').style.display='none'
+        document.getElementById('report-title').style.display='block'
+         document.getElementById( "reported" ).textContent='';
         displayReportedPosts();
     }
 };
@@ -164,6 +174,8 @@ const loadPosts = async () =>{
   let data = await fetch('../data/posts.json');
   posts = await data.json();
   showPosts(posts);
+  document.getElementById('liked-title').style.display='none'
+  document.getElementById('report-title').style.display='none'
 }
 
 loadPosts();
